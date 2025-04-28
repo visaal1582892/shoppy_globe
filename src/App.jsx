@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Categories from './components/Categories';
+import SuggestedProducts from './components/SuggestedProducts';
+import useFetch from './utils/useFetch';
+import { useDispatch } from 'react-redux';
+import { setCategoriesData, setCategoriesError } from './utils/categoriesSlice';
+import { setProductsData, setProductsError } from './utils/productsSlice';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+
+  // Fetching
+  const categoriesResponse = useFetch('https://dummyjson.com/products/categories');
+  const productsResponse = useFetch('https://dummyjson.com/products?limit=120&select=id,title,description,category,price,discountPercentage,rating,stock,warrantyInformation,shippingInformation,returnPolicy,thumbnail,images');
+
+  // Single useEffect for both
+  useEffect(() => {
+    // Categories handling
+    if (categoriesResponse) {
+      if (categoriesResponse.status === "Success") {
+        dispatch(setCategoriesData(categoriesResponse.data));
+      } else if (categoriesResponse.status === "Error") {
+        dispatch(setCategoriesError(categoriesResponse.data));
+      }
+    }
+
+    // Products handling
+    if (productsResponse) {
+      if (productsResponse.status === "Success") {
+        dispatch(setProductsData(productsResponse.data.products));
+      } else if (productsResponse.status === "Error") {
+        dispatch(setProductsError(productsResponse.data));
+      }
+    }
+  }, [categoriesResponse, productsResponse, dispatch]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex flex-col items-center justify-start min-h-screen overflow-x-hidden w-full">
+      <Header />
+      <Navbar />
+      <Categories />
+      <SuggestedProducts />
+    </div>
+  );
 }
 
-export default App
+export default App;
