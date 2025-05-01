@@ -16,10 +16,18 @@ const ProductCard = ({product}) => {
 
     // Adding to cart
     dispatch(addToCart({id: product.id, title: product.title, brand: product.brand, price: product.price, discountPercentage: product.discountPercentage, stock: product.stock, thumbnail: product.thumbnail, warrantyInformation: product.warrantyInformation, shippingInformation: product.shippingInformation, returnPolicy: product.returnPolicy, reviews: product.reviews}));
-    
-    // Response Handled
-    dispatch(setSuccess("Product Added to Cart Succesfully Visit Cart to Checkout"));
-    setTimeout(()=>dispatch(setIdeal()),3500);
+
+    if(product.stock<=0){
+      // Response Handled
+      dispatch(setError("No more stock available to add to Cart"));
+      setTimeout(()=>dispatch(setIdeal()),3500);
+    }
+
+    else{
+      // Response Handled
+      dispatch(setSuccess("Product Added to Cart Succesfully Visit Cart to Checkout"));
+      setTimeout(()=>dispatch(setIdeal()),3500);
+    }
   }
 
   const handleIncrement=(e)=>{
