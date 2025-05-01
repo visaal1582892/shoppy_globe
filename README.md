@@ -45,6 +45,12 @@ Shoppy-Globe/
 - **Redux Toolkit** – For predictable state management
 - **React Router DOM** – For client-side routing
 
+## Deployment Details
+
+- **Deployed In Vercel** - [Deployed Link](https://shoppy-globe-phi.vercel.app/)
+
+- **Project Github Link** - [Github Link](https://github.com/visaal1582892/shoppy_globe)
+
 ---
 
 ## 🧪 Getting Started
