@@ -2,6 +2,36 @@
 
 @theme{
   --font-poppins: Poppins, sans-serif;
+  --animate-revealing: reveal 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  --animate-timing: time 3s linear 0.5s forwards;
+  --animate-fadingIn: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes reveal {
+  from{
+    transform: translateX(100%);
+  }
+  to{
+    transform: translateX(0);
+  }
+}
+
+@keyframes time{
+  from{
+    width: 100%;
+  }
+  to{
+    width: 0%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .nav-link {

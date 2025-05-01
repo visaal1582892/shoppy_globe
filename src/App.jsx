@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import Categories from './components/Categories';
-import SuggestedProducts from './components/SuggestedProducts';
+import Response from './components/Response';
 import useFetch from './utils/useFetch';
 import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import { setCategoriesData, setCategoriesError } from './utils/categoriesSlice';
 import { setProductsData, setProductsError } from './utils/productsSlice';
 import './App.css';
@@ -14,7 +14,7 @@ function App() {
 
   // Fetching
   const categoriesResponse = useFetch('https://dummyjson.com/products/categories');
-  const productsResponse = useFetch('https://dummyjson.com/products?limit=120&select=id,title,description,category,price,discountPercentage,rating,stock,warrantyInformation,shippingInformation,returnPolicy,thumbnail,images');
+  const productsResponse = useFetch('https://dummyjson.com/products?limit=194&select=id,title,description,category,price,discountPercentage,rating,stock,brand,warrantyInformation,shippingInformation,returnPolicy,thumbnail,reviews');
 
   // Single useEffect for both
   useEffect(() => {
@@ -38,11 +38,11 @@ function App() {
   }, [categoriesResponse, productsResponse, dispatch]);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen overflow-x-hidden w-full">
+    <div className="flex flex-col items-center justify-start min-h-screen w-full animate-fadingIn">
       <Header />
       <Navbar />
-      <Categories />
-      <SuggestedProducts />
+      <Response />
+      <Outlet />
     </div>
   );
 }

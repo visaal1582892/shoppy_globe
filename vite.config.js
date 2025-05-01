@@ -7,13 +7,4 @@ export default defineConfig({
   plugins: [react(),
             tailwincss()
             ],
-
-  // For development purpose
-  server: {
-    port: 5173,
-    host: true,
-    // proxy: {
-
-    // }
-  }
 })
