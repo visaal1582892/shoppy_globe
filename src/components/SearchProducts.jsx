@@ -24,7 +24,7 @@ const SearchProducts = () => {
             <form action="." method="post" className='flex flex-col items-center w-[100%] text-orange-500 font-medium p-7 bg-white justify-around text-sm sm:flex-row sm:justify-around gap-7'>
                 <label className='flex items-center w-[90%] justify-center sm:w-lg gap-2'>
                     <img src="/images/searchIcon.png" alt="searchIcon" className='w-8'/>
-                    <input type="text" placeholder='Search books or authors' name='search' className='border-2 border-blue-300 rounded-lg px-2 py-1 placeholder:text-gray-400/60 outline-none font-medium ml-3 w-[80%] hover:border-blue-500 focus:border-blue-500' value={search} onInput={(event) => setSearch(event.target.value)}/>
+                    <input type="text" placeholder='Search Name or Brand or Desc' name='search' className='border-2 border-blue-300 rounded-lg px-2 py-1 placeholder:text-gray-400/60 outline-none font-medium ml-3 w-[80%] hover:border-blue-500 focus:border-blue-500' value={search} onInput={(event) => setSearch(event.target.value)}/>
                 </label>
                 <label className='flex items-center justify-around w-[90%] sm:w-md font-medium'>
                     <p className='text-blue-500'>Filter By</p>
